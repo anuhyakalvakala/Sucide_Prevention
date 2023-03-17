@@ -1,0 +1,118 @@
+<!---<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content ="width =device-width,initial-scale=1.0">
+        <title>Image upload</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="container" >
+        <form actions="{{url_for('predict')}}" method="post" enctype="multipart/form-data">
+
+            <div class="container1">
+                <input type="text" id ="txt_input" Placeholder="Enter the comment">       
+            </div> 
+            <p class ="output" id="output"></p>
+            <input type="file" accept="image/*" name="image" id="img_input"  style="display: none">
+            <label for="img_input"><img src="/Users/anuhyakalvakala/Downloads/stories-img/upload.png" class="upload-icon"></label>
+            <div id="display_img"></div>  
+            <button type="submit" id="btn1">Upload</button>
+        </form>
+
+        </div>
+        <script>
+            const img_input = document.querySelector("#img_input");
+            const txt1 = document.getElementById("txt_input");
+            const btn1 = document.getElementById("btn1");
+            const out1 = document.getElementById("output");
+            var uploaded_img="";
+            img_input.addEventListener("change",function(){
+                const reader = new FileReader();
+                reader.addEventListener("load",() => {
+                    uploaded_img = reader.result;
+                    document.querySelector("#display_img").style.backgroundImage = `url(${uploaded_img})`;
+                });
+                reader.readAsDataURL(this.files[0]);
+            })
+            function fun1(){
+                out1.innerHTML = txt1.value;
+            }
+            btn1.addEventListener('click',fun1);
+
+
+        </script>
+    </body>
+</html>
+-->
+<html>
+<head>
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  --><link rel="stylesheet" href= "{{ url_for('static',filename='css/style.css') }}"/><!-- href="/Users/anuhyakalvakala/Desktop/sc/static/css/style.css"/>   -->
+  <title>Image and Comment Emotion Detection</title>
+</head>
+<body>
+
+    <!--image-->
+
+    <div id="title" class="center" >
+      <h1><span style="top:2%;" >Emotion prediction</span></h1>
+    </div>
+
+    <div class="container">
+        <div class="gap"></div>
+        <div class ="img"  id="display_img">
+            <!-- <p id ="output" ></p> -->
+        </div>
+        <div class="gap"></div>
+        <div>
+            <form action = "/predict" method = "post" enctype="multipart/form-data">
+            <input type="text" name="text" Placeholder="Enter the comment" id ="txt_input" />
+            <input type="file" name="file" id="img_input" accept="image/*" style="display: none" />
+            <label for="img_input"><img src="{{ url_for('static',filename='upload.png') }}" class="upload-icon"></label>
+            <input type = "submit" value="Upload" id="btn1" >
+          </form>
+        </div>
+    </div>
+
+
+   <!-- <div class="container" style="display: flex; height: 100px;">
+        <div style="width: 50%; background: green;">
+            Left Div
+        </div>
+        <div style="flex-grow: 1; background: blue;">
+            Right Div
+        </div>
+    </div>-->
+
+
+    <script>
+        const img_input = document.querySelector("#img_input");
+        const txt1 = document.getElementById("#txt_input");
+        const btn1 = document.getElementById("#btn1");
+        const out1 = document.getElementById("#output");
+        var uploaded_img="";
+        img_input.addEventListener("change",function(){
+            const reader = new FileReader();
+            reader.addEventListener("load",() => {
+                uploaded_img = reader.result;
+                document.querySelector("#display_img").style.backgroundImage = `url(${uploaded_img})`;
+            });
+            reader.readAsDataURL(this.files[0]);
+        })
+        // function fun1(){
+        //     out1 = txt1.value;
+        //     document.querySelector("#output").style.value = `url(${out1})`;
+        //}
+        // txt1.addEventListener("change",function(){
+        //     const reader = new FileReader();
+        //     reader.addEventListener("load",() => {
+        //         out1 = reader.result;
+        //         document.querySelector("#output").append.value = `url(${out1})`;
+        //     });
+        //     reader.readAsDataURL(this.txt1);})
+    </script>
+    
+
+
+</body>
+</html>
